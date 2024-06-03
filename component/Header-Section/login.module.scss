@@ -1,0 +1,39 @@
+.loginHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  color: var(--neutral-dark);
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.formGroup input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--neutral-dark);
+  border-radius: 4px;
+}
+
+.formArea {
+  display: grid;
+  gap: 16px;
+}
+
+.loginButton {
+  cursor: pointer;
+  font-size: var(--h4);
+  background-color: var(--primary);
+  border: 1px solid var(--neutral-dark);
+  padding: 8px;
+  margin-top: 32px;
+  border-radius: 4px;
+}

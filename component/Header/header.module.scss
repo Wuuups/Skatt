@@ -2,6 +2,7 @@
   grid-template-columns: repeat(12, 1fr);
   display: grid;
   gap: 28px;
+  position: relative;
 
   .logo {
     grid-column: span 2;
@@ -13,15 +14,27 @@
     background-color: var(--neutral-light);
   }
   .menu {
+    max-height: calc(100vh - 56px);
+    position: absolute;
+    width: 100%;
     grid-column: 10 / span 3;
     border-radius: 8px;
     border: 1px solid var(--neutral-dark);
     background-color: var(--neutral-light);
+    color: var(--neutral-dark);
     padding: 10px 16px;
-    display: flex;
-    justify-content: space-between;
-    & button {
-      font-size: var(--h4);
+    .links {
+      display: flex;
+      justify-content: space-between;
+      & button {
+        font-size: var(--h4);
+      }
+    }
+    // form
+    .form-container {
+      padding-block: 32px;
+      display: grid;
+      gap: 32px;
     }
   }
 }
