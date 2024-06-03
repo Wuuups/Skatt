@@ -1,0 +1,40 @@
+.footer-container {
+  display: grid;
+  border-radius: 8px;
+  border: 1px solid var(--neutral-dark);
+  background: var(--neutral-light);
+  padding: 20px 16px;
+  gap: 40px;
+
+  .footer-top {
+    grid-template-columns: repeat(12, 1fr);
+    display: grid;
+    gap: 28px;
+
+    .logo {
+      grid-column: 1 / span 2;
+    }
+
+    .links {
+      grid-column: 9 / span 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      & button {
+        font-size: var(--h2);
+      }
+    }
+  }
+  .footer-bottom {
+    grid-template-columns: repeat(12, 1fr);
+    display: grid;
+    gap: 28px;
+    .section {
+      font-size: var(--h6);
+      grid-column: span 4;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
