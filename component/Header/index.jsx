@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState } from 'react'
 import styles from './header.module.scss'
 import Cart from '../Header-Section/Cart'
 import Login from '../Header-Section/Login'
@@ -17,24 +17,29 @@ export default function Header() {
       </div>
       <div className={`${styles.menu} ${activeSection ? styles.active : ''}`}>
         <div className={styles.links}>
-          <button className={`${styles.shopBtn} shopBtn`}>Shop</button>
           <button
-            className={`${styles.cartBtn} cartBtn`}
+            className={`${styles.shopBtn} ${activeSection === 'shop' ? styles.activeBtn : ''}`}
+            onClick={() => handleButtonClick('shop')}
+          >
+            Shop
+          </button>
+          <button
+            className={`${styles.cartBtn} ${activeSection === 'cart' ? styles.activeBtn : ''}`}
             onClick={() => handleButtonClick('cart')}
           >
             Cart
           </button>
           <button
-            className={`${styles.accountBtn} accountBtn`}
+            className={`${styles.accountBtn} ${activeSection === 'account' ? styles.activeBtn : ''}`}
             onClick={() => handleButtonClick('account')}
           >
             Login
           </button>
           <button
-            className={`${styles.closeBtn} closeBtn`}
+            className={`${styles.closeBtn} ${activeSection ? styles.show : ''}`}
             onClick={() => handleButtonClick(null)}
           >
-            X
+            <img src="/icons/close.svg" alt="Close" />
           </button>
         </div>
         <div className={`${styles.section} ${activeSection === 'cart' ? styles.open : ''}`}>
