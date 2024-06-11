@@ -1,104 +1,56 @@
 .headerContainer {
-   display: grid;
-   grid-template-columns: repeat(12, 1fr);
-   gap: 28px;
-   position: relative;
- 
-   .logo {
-     grid-column: span 2;
-     display: flex;
-     justify-content: center;
-     padding: 10px 16px;
-     border: 1px solid var(--neutral-dark);
-     border-radius: 8px;
-     background-color: var(--neutral-light);
-   }
- 
-   .menu {
-     position: absolute;
-     width: 100%;
-     grid-column: 10 / span 3;
-     padding: 10px 16px;
-     border: 1px solid var(--neutral-dark);
-     border-radius: 8px;
-     background-color: var(--neutral-light);
-     color: var(--neutral-dark);
-     max-height: calc(100vh - 56px);
-     transition: all 0.5s ease;
- 
-     &.active {
-       .shopBtn,
-       .accountBtn,
-       .cartBtn {
-         opacity: 0;
-         pointer-events: none;
-       }
-       .closeBtn {
-         display: block;
-         opacity: 1;
-       }
-     }
- 
-     .links {
-       display: flex;
-       justify-content: space-between;
-       align-items: center;
-       position: relative;
- 
-       button {
-         cursor: pointer;
-         font-size: var(--h4);
-         transition: transform 0.5s, opacity 0.5s;
-         display: flex;
-         align-items: center;
-       }
- 
-       .shopBtn,
-       .accountBtn,
-       .cartBtn,
-       .closeBtn {
-         transition: all 0.5s ease;
-       }
- 
-       .closeBtn {
-         opacity: 0;
-         display: none;
-         position: absolute;
-         right: 0;
- 
-         &.show {
-           opacity: 1;
-           display: block;
-         }
-       }
- 
-       .activeBtn {
-         opacity: 1 !important;
-         pointer-events: all !important;
-         display: block !important;
-         transform: translateX(0) !important;
-         position: absolute;
-         left: 0;
-       }
-     }
- 
-     .section {
-       overflow: hidden;
-       max-height: 0;
-       transition: max-height 0.7s ease-out;
- 
-       &.open {
-         max-height: calc(100vh); // Adjust as needed
-       }
- 
-       .formContainer {
-         display: grid;
-         gap: 32px;
-         padding-block: 32px;
-         height: calc(100vh - 56px);
-         overflow: hidden;
-       }
-     }
-   }
- }
- 
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 28px;
+  position: relative;
+
+  .logo {
+    grid-column: span 2;
+    display: flex;
+    justify-content: center;
+    padding: 10px 16px;
+    border: 1px solid var(--neutral-dark);
+    border-radius: 8px;
+    background-color: var(--neutral-light);
+  }
+
+  .menu {
+    position: absolute;
+    width: 100%;
+    grid-column: 10 / span 3;
+    padding: 10px 16px;
+    border: 1px solid var(--neutral-dark);
+    background-color: var(--neutral-light);
+    border-radius: 8px;
+    color: var(--neutral-dark);
+    max-height: calc(100vh - 56px);
+
+    .links {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+
+      button {
+        cursor: pointer;
+        font-size: var(--h4);
+        display: flex;
+        align-items: center;
+
+        &.closeBtn {
+          display: none;
+        }
+      }
+    }
+
+    .formContainer {
+      overflow: hidden;
+      height: 0;
+      transition: all 0.7s ease-in-out;
+
+      &.containerActive {
+        height: calc(100vh - 56px);
+      }
+    }
+  }
+}
