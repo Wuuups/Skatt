@@ -69,4 +69,6 @@ button {
   border: none;
   background: none;
   color: var(--neutral-dark);
+  display: flex;
+  align-content: center;
 }

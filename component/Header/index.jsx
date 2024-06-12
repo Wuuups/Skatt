@@ -7,7 +7,6 @@ import Login from '../Header-Section/Login'
 export default function Header() {
   const [activeSection, setActiveSection] = useState(null)
   const [visibleSection, setVisibleSection] = useState(null)
-  const menuRef = useRef(null)
   const shopBtnRef = useRef(null)
   const cartBtnRef = useRef(null)
   const accountBtnRef = useRef(null)
@@ -23,68 +22,53 @@ export default function Header() {
   }
 
   useEffect(() => {
-   const menuWidth = menuRef.current ? menuRef.current.offsetWidth : 0
-
     if (activeSection) {
-      if (
-        shopBtnRef.current &&
-        accountBtnRef.current &&
-        cartBtnRef.current &&
-        closeBtnRef.current
-      ) {
-        if (activeSection === 'cart') {
-          gsap.to([shopBtnRef.current, accountBtnRef.current], {
-            opacity: 0,
-            duration: 0.7,
-            display: 'none',
-            onComplete: () => {
-              gsap.to(cartBtnRef.current, { x: -100, duration: 0.7 })
-              gsap.to(closeBtnRef.current, {
-                opacity: 1,
-                display: 'block',
-                duration: 0.7,
-              })
-            },
-          })
-        } else if (activeSection === 'account') {
-          gsap.to([shopBtnRef.current, cartBtnRef.current], {
-            opacity: 0,
-            duration: 0.7,
-            onComplete: () => {
-              gsap.to(accountBtnRef.current, { x: -100, duration: 0.7 })
-              gsap.to(closeBtnRef.current, {
-                opacity: 1,
-                display: 'block',
-                duration: 0.7,
-              })
-            },
-          })
-        }
-      }
-    } else {
-      if (
-        shopBtnRef.current &&
-        accountBtnRef.current &&
-        cartBtnRef.current &&
-        closeBtnRef.current
-      ) {
-        gsap.to(closeBtnRef.current, {
+      if (activeSection === 'cart') {
+        gsap.to([shopBtnRef.current, accountBtnRef.current], {
+          pointerEvents: 'none',
           opacity: 0,
           duration: 0.7,
           onComplete: () => {
-            gsap.set(closeBtnRef.current, { display: 'none' })
-            gsap.to(cartBtnRef.current, { x: 0, duration: 0.7 })
-            gsap.to(accountBtnRef.current, { x: 0, duration: 0.7 })
-            gsap.to(
-              [shopBtnRef.current, accountBtnRef.current, cartBtnRef.current],
-              {
-                opacity: 1,
-                duration: 0.7,
-              }
+            gsap.fromTo(
+              cartBtnRef.current,
+              { position: 'absolute', pointerEvents: 'none', left: '50%' },
+              { left: 0, duration: 0.7 }
             )
+            gsap.to(closeBtnRef.current, { opacity: 1, duration: 0.7 })
+          },
+        })
+      } else if (activeSection === 'account') {
+        gsap.to([shopBtnRef.current, cartBtnRef.current], {
+          pointerEvents: 'none',
+          opacity: 0,
+          duration: 0.7,
+          onComplete: () => {
+            gsap.fromTo(
+              accountBtnRef.current,
+              { position: 'absolute', pointerEvents: 'none', left: '50%' },
+              { left: 0, duration: 0.7 }
+            )
+            gsap.to(closeBtnRef.current, { opacity: 1, duration: 0.7 })
           },
         })
       }
+    } else {
+      gsap.to(closeBtnRef.current, {
+        opacity: 0,
+        duration: 0.7,
+        onComplete: () => {
+          gsap.to(cartBtnRef.current, { left: '50%', duration: 0.7 })
+          gsap.to(accountBtnRef.current, { left: '100%', duration: 0.7 })
+          gsap.to(
+            [shopBtnRef.current, accountBtnRef.current, cartBtnRef.current],
+            {
+              pointerEvents: 'auto',
+              opacity: 1,
+              duration: 0.7,
+            }
+          )
+        },
+      })
     }
   }, [activeSection])
 
@@ -93,7 +77,7 @@ export default function Header() {
       <div className={styles.logo}>
         <img src="/icons/logoText.svg" alt="Logo" />
       </div>
-      <div ref={menuRef} className={styles.menu}>
+      <div className={styles.menu}>
         <div className={styles.links}>
           <button ref={shopBtnRef} onClick={() => handleButtonClick('shop')}>
             Shop
