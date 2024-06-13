@@ -6,8 +6,8 @@
 }
 
 .loginForm {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  gap: 32px;
   color: var(--neutral-dark);
   padding-block: 32px;
 }
@@ -32,9 +32,11 @@
 .loginButton {
   cursor: pointer;
   font-size: var(--h4);
-  background-color: var(--primary);
-  border: 1px solid var(--neutral-dark);
+  justify-content: center;
+  align-content: center;
+  text-align: center;
   padding: 8px;
-  margin-top: 32px;
-  border-radius: 4px;
+  background: var(--primary);
+  border-radius: 6px;
+  border: 1px solid var(--neutral-dark);
 }

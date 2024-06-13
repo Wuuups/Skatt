@@ -33,7 +33,20 @@
 
       button {
         cursor: pointer;
+        user-select: none;
         font-size: var(--h4);
+
+        &.cartBtn{
+         position: absolute;
+         left: 50%;
+         transform: translateX(-50%);
+        }
+
+        &.accountBtn{
+         position: absolute;
+         left: 100%;
+         transform: translateX(-100%);
+        }
 
         &.closeBtn {
           opacity: 0;

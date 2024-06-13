@@ -31,8 +31,11 @@ export default function Header() {
           onComplete: () => {
             gsap.fromTo(
               cartBtnRef.current,
-              { position: 'absolute', pointerEvents: 'none', left: '50%' },
-              { left: 0, duration: 0.7 }
+              {
+                pointerEvents: 'none',
+                transform: 'translateX(-50%)',
+              },
+              { left: 0, duration: 0.7, transform: 'translateX(0)' }
             )
             gsap.to(closeBtnRef.current, { opacity: 1, duration: 0.7 })
           },
@@ -45,20 +48,32 @@ export default function Header() {
           onComplete: () => {
             gsap.fromTo(
               accountBtnRef.current,
-              { position: 'absolute', pointerEvents: 'none', left: '50%' },
-              { left: 0, duration: 0.7 }
+              {
+                pointerEvents: 'none',
+                transform: 'translateX(-100%)',
+              },
+              { left: 0, duration: 0.7, transform: 'translateX(0)' }
             )
             gsap.to(closeBtnRef.current, { opacity: 1, duration: 0.7 })
           },
         })
       }
-    } else {
+    }
+    if (activeSection === null) {
       gsap.to(closeBtnRef.current, {
         opacity: 0,
         duration: 0.7,
         onComplete: () => {
-          gsap.to(cartBtnRef.current, { left: '50%', duration: 0.7 })
-          gsap.to(accountBtnRef.current, { left: '100%', duration: 0.7 })
+          gsap.to(cartBtnRef.current, {
+            left: '50%',
+            transform: 'translateX(-50%)',
+            duration: 0.7,
+          })
+          gsap.to(accountBtnRef.current, {
+            left: '100%',
+            duration: 0.7,
+            transform: 'translateX(-100%)',
+          })
           gsap.to(
             [shopBtnRef.current, accountBtnRef.current, cartBtnRef.current],
             {
@@ -79,14 +94,17 @@ export default function Header() {
       </div>
       <div className={styles.menu}>
         <div className={styles.links}>
-          <button ref={shopBtnRef} onClick={() => handleButtonClick('shop')}>
-            Shop
-          </button>
-          <button ref={cartBtnRef} onClick={() => handleButtonClick('cart')}>
+          <button ref={shopBtnRef}>Shop</button>
+          <button
+            ref={cartBtnRef}
+            className={styles.cartBtn}
+            onClick={() => handleButtonClick('cart')}
+          >
             Cart
           </button>
           <button
             ref={accountBtnRef}
+            className={styles.accountBtn}
             onClick={() => handleButtonClick('account')}
           >
             Login

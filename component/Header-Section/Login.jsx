@@ -3,7 +3,7 @@ import styles from './login.module.scss'
 
 export default function Login() {
   return (
-    <form method='post' className={styles.loginForm}>
+    <form method="post" className={styles.loginForm}>
       <div className={styles.formArea}>
         <div className={styles.formGroup}>
           <div>
