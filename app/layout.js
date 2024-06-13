@@ -7,8 +7,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <title>Skatt</title>
-      <body id="smooth-wrapper">
-        <div id="smooth-content">
+      <body>
+        <div>
           <header>
             <Header />
           </header>

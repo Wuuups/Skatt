@@ -1,4 +1,6 @@
+'use client'
 import { useState, useRef, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import gsap from 'gsap'
 import styles from './header.module.scss'
 import Cart from '../Header-Section/Cart'
@@ -12,6 +14,9 @@ export default function Header() {
   const accountBtnRef = useRef(null)
   const closeBtnRef = useRef(null)
 
+  const router = useRouter()
+  const pathname = usePathname()
+
   const handleButtonClick = (section) => {
     if (activeSection === section) {
       setActiveSection(null)
@@ -20,14 +25,20 @@ export default function Header() {
       setVisibleSection(section)
     }
   }
+  const handlePathClick = (path) => {
+   
+  }
 
   useEffect(() => {
     if (activeSection) {
       if (activeSection === 'cart') {
+        gsap.to(cartBtnRef.current, {
+          pointerEvents: 'none',
+        })
         gsap.to([shopBtnRef.current, accountBtnRef.current], {
           pointerEvents: 'none',
           opacity: 0,
-          duration: 0.7,
+          duration: 0.5,
           onComplete: () => {
             gsap.fromTo(
               cartBtnRef.current,
@@ -37,14 +48,22 @@ export default function Header() {
               },
               { left: 0, duration: 0.7, transform: 'translateX(0)' }
             )
-            gsap.to(closeBtnRef.current, { opacity: 1, duration: 0.7 })
+            gsap.to(closeBtnRef.current, {
+              pointerEvents: 'auto',
+              opacity: 1,
+              duration: 0.7,
+              delay: 0.5,
+            })
           },
         })
       } else if (activeSection === 'account') {
+        gsap.to(accountBtnRef.current, {
+          pointerEvents: 'none',
+        })
         gsap.to([shopBtnRef.current, cartBtnRef.current], {
           pointerEvents: 'none',
           opacity: 0,
-          duration: 0.7,
+          duration: 0.5,
           onComplete: () => {
             gsap.fromTo(
               accountBtnRef.current,
@@ -54,15 +73,22 @@ export default function Header() {
               },
               { left: 0, duration: 0.7, transform: 'translateX(0)' }
             )
-            gsap.to(closeBtnRef.current, { opacity: 1, duration: 0.7 })
+            gsap.to(closeBtnRef.current, {
+              pointerEvents: 'auto',
+              opacity: 1,
+              duration: 0.7,
+              delay: 0.5,
+            })
           },
         })
       }
     }
     if (activeSection === null) {
       gsap.to(closeBtnRef.current, {
+        pointerEvents: 'none',
+
         opacity: 0,
-        duration: 0.7,
+        duration: 0.5,
         onComplete: () => {
           gsap.to(cartBtnRef.current, {
             left: '50%',
@@ -79,7 +105,8 @@ export default function Header() {
             {
               pointerEvents: 'auto',
               opacity: 1,
-              duration: 0.7,
+              duration: 0.5,
+              delay: 0.5,
             }
           )
         },
@@ -89,12 +116,24 @@ export default function Header() {
 
   return (
     <div className={styles.headerContainer}>
-      <div className={styles.logo}>
+      <div
+        className={styles.logo}
+        onClick={() => {
+          handlePathClick('/')
+        }}
+      >
         <img src="/icons/logoText.svg" alt="Logo" />
       </div>
       <div className={styles.menu}>
         <div className={styles.links}>
-          <button ref={shopBtnRef}>Shop</button>
+          <button
+            ref={shopBtnRef}
+            onClick={() => {
+              handlePathClick('/product')
+            }}
+          >
+            Shop
+          </button>
           <button
             ref={cartBtnRef}
             className={styles.cartBtn}
