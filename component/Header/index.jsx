@@ -1,6 +1,6 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import gsap from 'gsap'
 import styles from './header.module.scss'
 import Cart from '../Header-Section/Cart'
@@ -15,7 +15,6 @@ export default function Header() {
   const closeBtnRef = useRef(null)
 
   const router = useRouter()
-  const pathname = usePathname()
 
   const handleButtonClick = (section) => {
     if (activeSection === section) {
@@ -24,9 +23,6 @@ export default function Header() {
       setActiveSection(section)
       setVisibleSection(section)
     }
-  }
-  const handlePathClick = (path) => {
-   
   }
 
   useEffect(() => {
@@ -119,7 +115,7 @@ export default function Header() {
       <div
         className={styles.logo}
         onClick={() => {
-          handlePathClick('/')
+          router.push('/')
         }}
       >
         <img src="/icons/logoText.svg" alt="Logo" />
@@ -129,7 +125,7 @@ export default function Header() {
           <button
             ref={shopBtnRef}
             onClick={() => {
-              handlePathClick('/product')
+              router.push('/product')
             }}
           >
             Shop

@@ -5,6 +5,8 @@
   position: relative;
 
   .logo {
+    cursor: pointer;
+    user-select: none;
     grid-column: span 2;
     display: flex;
     justify-content: center;
@@ -36,16 +38,16 @@
         user-select: none;
         font-size: var(--h4);
 
-        &.cartBtn{
-         position: absolute;
-         left: 50%;
-         transform: translateX(-50%);
+        &.cartBtn {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
         }
 
-        &.accountBtn{
-         position: absolute;
-         left: 100%;
-         transform: translateX(-100%);
+        &.accountBtn {
+          position: absolute;
+          left: 100%;
+          transform: translateX(-100%);
         }
 
         &.closeBtn {

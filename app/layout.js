@@ -2,6 +2,7 @@
 import '@/styles/globals.css'
 import Header from '@/component/Header'
 import Footer from '@/component/Footer'
+import PageTransition from '@/component/PageTransition'
 
 export default function RootLayout({ children }) {
   return (
@@ -12,7 +13,9 @@ export default function RootLayout({ children }) {
           <header>
             <Header />
           </header>
-          <main>{children}</main>
+          <PageTransition>
+            <main>{children}</main>
+          </PageTransition>
           <footer>
             <Footer />
           </footer>
