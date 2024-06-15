@@ -14,7 +14,7 @@ export default function Cart() {
               </div>
               <div className={styles['info']}>
                 <div>Colored Campbell's Soup Eggplant</div>
-                <div>$7,217.00</div>
+                <div>$ 7,217</div>
                 <div className={styles['num']}>
                   <div className={styles['edit-num']}>
                     <img src="/icons/minus.svg" />
@@ -26,13 +26,13 @@ export default function Cart() {
               </div>
             </div>
           </div>
-        </div>
-        <div className={styles['checkout-area']}>
-          <div className={styles['price']}>
-            <div>Total</div>
-            <div>$3,3580</div>
+          <div className={styles['checkout-area']}>
+            <div className={styles['price']}>
+              <div>Total</div>
+              <div>$3,3580</div>
+            </div>
+            <button className={styles['checkout']}>Checkout</button>
           </div>
-          <button className={styles['checkout']}>Checkout</button>
         </div>
       </div>
     </>
