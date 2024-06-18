@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function page() {
+export default function homePage() {
   return (
     <div className='page'>home</div>
   )

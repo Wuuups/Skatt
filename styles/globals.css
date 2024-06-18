@@ -43,7 +43,6 @@ main {
   margin-top: 100px;
   flex: 1 0 auto;
   height: 80vh;
-  border: 1px solid #aaa;
   position: relative;
   overflow-x: hidden;
   display: flex;
