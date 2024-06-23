@@ -1,0 +1,26 @@
+.sliderContainer {
+  //   position: absolute;
+}
+.slider {
+  position: absolute;
+    border-block: 1px solid var(--neutral-dark);
+  display: flex;
+  background: var(--neutral-light);
+  padding-block: 4px;
+  & div {
+    align-items: center;
+    display: flex;
+    & p {
+      font-size: var(--h3);
+      padding-inline: 12px;
+    }
+    & img {
+      height: 20px;
+      padding-inline: 12px;
+    }
+  }
+  & div:nth-last-of-type(2) {
+    position: absolute;
+    left: 100%;
+  }
+}

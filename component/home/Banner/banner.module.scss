@@ -1,0 +1,16 @@
+.objFit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.banner {
+  font-size: 120px;
+  line-height: 95%;
+  color: var(--neutral-dark);
+  position: absolute;
+  top: 5%;
+}
+.skateImg {
+  position: absolute;
+  bottom: 0;
+}

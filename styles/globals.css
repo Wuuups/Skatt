@@ -1,5 +1,11 @@
 /* 引入字體 */
-@import url('https://use.typekit.net/sab0sjg.css');
+/* @import url('https://use.typekit.net/sab0sjg.css'); */
+@font-face {
+  font-family: 'VinilaTest';
+  src: url('/font/VinilaTest-Regular.otf');
+  font-weight: normal;
+  font-style: normal;
+}
 
 :root {
   /* color */
@@ -30,35 +36,39 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--neutral-light);
-  font-family: 'vinila', sans-serif;
-  padding: 0 28px;
+  font-family: 'VinilaTest', sans-serif;
   min-height: 100vh;
   scroll-behavior: smooth;
-  &::-webkit-scrollbar {
+  /* &::-webkit-scrollbar {
     display: none;
-  }
+  } */
 }
 
 main {
   margin-top: 100px;
   flex: 1 0 auto;
-  height: 80vh;
-  position: relative;
-  overflow-x: hidden;
-  display: flex;
 }
 
 header {
   flex: 0 0 auto;
   padding: 28px 0;
+  left: 28px;
   position: fixed;
   width: calc(100% - 56px);
   z-index: 77777;
 }
 
 footer {
+  padding: 0 28px;
   flex: 0 0 auto;
   margin: 28px 0;
+}
+
+section {
+  padding: 28px;
+  height: calc(100vh - 100px);
+  position: relative;
+  overflow: hidden;
 }
 
 a {
@@ -67,7 +77,7 @@ a {
 }
 
 button {
-  font-family: 'vinila', sans-serif;
+  font-family: 'VinilaTest', sans-serif;
   padding: 0;
   margin: 0;
   border: none;

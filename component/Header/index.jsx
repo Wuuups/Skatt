@@ -6,7 +6,7 @@ import styles from './header.module.scss'
 import Cart from '../Header-Section/Cart'
 import Login from '../Header-Section/Login'
 
-export default function Header() {
+const Header = () => {
   const [activeSection, setActiveSection] = useState(null)
   const [visibleSection, setVisibleSection] = useState(null)
   const shopBtnRef = useRef(null)
@@ -164,3 +164,5 @@ export default function Header() {
     </div>
   )
 }
+
+export default Header
