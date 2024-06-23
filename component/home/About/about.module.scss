@@ -3,24 +3,18 @@
   position: relative;
   display: flex;
   align-items: center;
+  
   .firstMarquee {
     position: absolute;
     left: -5%;
-    top: 20%;
-    rotate: 15deg;
+    top: 0;
   }
 
   .about {
-    font-size: 48px;
     & p {
+      font-size: 48px;
       width: 60%;
-      position: absolute;
       padding: 12px;
-      background: var(--primary);
-      border: 1px solid var(--neutral-dark);
-      rotate: -5deg;
-      top: 10%;
-      right: 25%;
     }
   }
 }
