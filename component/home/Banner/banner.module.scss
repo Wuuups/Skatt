@@ -9,6 +9,9 @@
   color: var(--neutral-dark);
   position: absolute;
   top: 5%;
+  & span{
+   // background: var(--primary);
+  }
 }
 .skateImg {
   position: absolute;

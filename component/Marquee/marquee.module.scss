@@ -2,21 +2,22 @@
   //   position: absolute;
 }
 .slider {
+  user-select: none;
   position: absolute;
-   //  border-block: 1px solid var(--neutral-dark);
+  border-block: 1px solid var(--neutral-dark);
   display: flex;
-  background: var(--neutral-light);
+  background: var(--primary);
   padding-block: 4px;
   & div {
     align-items: center;
     display: flex;
     & p {
       font-size: var(--h3);
-      padding-inline: 12px;
+      padding-inline: 24px;
     }
     & img {
       height: 20px;
-      padding-inline: 12px;
+      padding-inline: 24px;
     }
   }
   & div:nth-last-of-type(2) {

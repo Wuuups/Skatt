@@ -3,17 +3,17 @@ import styles from './banner.module.scss'
 
 export default function Banner() {
   return (
-    <div>
+    <section>
       <div className={styles.banner}>
-        FALLING?
+        <span>FALLING?</span>
         <br />
-        JUST PART OF
+        <span>JUST PART OF</span>
         <br />
-        THE FUN.
+        <span>THE FUN.</span>
       </div>
       <div className={styles.skateImg}>
         <img className={styles.objFit} src="/images/skateboard.png" />
       </div>
-    </div>
+    </section>
   )
 }

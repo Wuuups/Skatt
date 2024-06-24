@@ -39,9 +39,12 @@ body {
   font-family: 'VinilaTest', sans-serif;
   min-height: 100vh;
   scroll-behavior: smooth;
-  /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
-  } */
+  }
+  ::selection {
+    background: var(--primary);
+  }
 }
 
 main {
@@ -66,7 +69,7 @@ footer {
 
 section {
   padding: 28px;
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   position: relative;
   overflow: hidden;
 }

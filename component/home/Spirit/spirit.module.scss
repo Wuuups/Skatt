@@ -1,4 +1,16 @@
-.spiritContainer{
-   display: grid;
-   grid-template-columns: repeat(2, 1fr);
+.spiritContainer {
+  font-size: var(--h1);
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+
+  .imgContainer {
+    display: inline-block;
+    height: 100%;
+    & img {
+       position: absolute;
+       left: 25%;
+    }
+  }
 }

@@ -1,20 +1,18 @@
-.wrap {
-  height: 100%;
-  position: relative;
-  display: flex;
-  align-items: center;
-  
-  .firstMarquee {
-    position: absolute;
-    left: -5%;
-    top: 0;
-  }
+.marquee {
+  position: absolute;
+  left: -5%;
+  top: 80%;
+  rotate: -10deg;
+}
 
-  .about {
-    & p {
-      font-size: 48px;
-      width: 60%;
-      padding: 12px;
-    }
+.about {
+   height: 100vh;
+   display: flex;
+   align-items: center;
+
+  & p {
+    font-size: 48px;
+    width: 60%;
+    padding: 12px;
   }
 }

@@ -6,15 +6,9 @@ import Spirit from '@/component/home/Spirit'
 export default function homePage() {
   return (
     <>
-      <section>
-        <Banner />
-      </section>
-      <section>
-        <About />
-      </section>
-      <section>
-        <Spirit />
-      </section>
+      <Banner />
+      <About />
+      <Spirit />
     </>
   )
 }
