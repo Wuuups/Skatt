@@ -3,17 +3,19 @@
   height: 100%;
   object-fit: cover;
 }
-.banner {
+.slogon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: 120px;
   line-height: 95%;
   color: var(--neutral-dark);
-  position: absolute;
-  top: 5%;
-  & span{
-   // background: var(--primary);
-  }
 }
 .skateImg {
   position: absolute;
-  bottom: 0;
+  bottom: 5%;
+  transform: translateX(-50%);
+}
+.bannerContainer {
+  height: calc(100vh - 100px);
 }

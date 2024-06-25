@@ -1,16 +1,19 @@
 .spiritContainer {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
   font-size: var(--h1);
-  height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-content: center;
+  min-height: 100vh;
 
   .imgContainer {
-    display: inline-block;
-    height: 100%;
+   display: flex;
     & img {
-       position: absolute;
-       left: 25%;
+      padding-right: 4px;
+      opacity: 0;
+    }
+    & .sripit{
+      padding: 20px;
+
     }
   }
 }
