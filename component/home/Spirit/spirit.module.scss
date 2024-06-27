@@ -1,19 +1,20 @@
 .spiritContainer {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   font-size: var(--h1);
+  color: var(--neutral-dark);
+
   min-height: 100vh;
 
   .imgContainer {
-   display: flex;
+    display: flex;
     & img {
       padding-right: 4px;
       opacity: 0;
     }
-    & .sripit{
+    & .sripit {
       padding: 20px;
-
     }
   }
 }
