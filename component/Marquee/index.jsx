@@ -69,7 +69,7 @@ export default function Marquee() {
       scrub: 0.25,
       onUpdate: (self) => {
         direction = self.direction === 1 ? -1 : 1
-      //   x = '-300px'
+        x = '-300px'
       },
     })
 

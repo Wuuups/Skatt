@@ -1,7 +1,7 @@
 .cart {
   color: var(--neutral-dark);
   padding-block: 32px;
-
+  font-size: var(--h5);
   .cart-list {
     display: grid;
     gap: 32px;
@@ -9,9 +9,9 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 16px;
-      font-size: var(--h6);
       margin-bottom: 10px;
       & img {
+        display: flex;
         grid-column: span 3;
         width: 100%;
       }
@@ -19,7 +19,6 @@
         grid-column: span 2;
         display: grid;
         gap: 12px;
-        font-size: var(--body-text);
         .num {
           display: flex;
           justify-content: space-between;
@@ -43,11 +42,9 @@
       .price {
         display: flex;
         justify-content: space-between;
-        font-size: var(--h6);
       }
       .checkout {
         cursor: pointer;
-        font-size: var(--h4);
         justify-content: center;
         align-content: center;
         text-align: center;

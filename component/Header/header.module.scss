@@ -1,25 +1,29 @@
 .headerContainer {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 28px;
+  display: flex;
   position: relative;
 
   .logo {
-    cursor: pointer;
-    user-select: none;
-    grid-column: span 2;
+    width: calc(100% / 6);
+    font-size: var(--h4);
     display: flex;
     justify-content: center;
     padding: 10px 16px;
-    border: 1px solid var(--neutral-dark);
     border-radius: 8px;
     background: var(--neutral-light);
+    border: 1px solid var(--neutral-dark);
+    cursor: pointer;
+    user-select: none;
+    & img {
+      padding-right: 8px;
+      height: 1em;
+      object-fit: cover;
+    }
   }
 
   .menu {
     position: absolute;
-    width: 100%;
-    grid-column: 10 / span 3;
+    right: 0;
+    width: calc(100% / 4);
     padding: 10px 16px;
     border: 1px solid var(--neutral-dark);
     background-color: var(--neutral-light);
@@ -37,7 +41,6 @@
       button {
         cursor: pointer;
         user-select: none;
-        font-size: var(--h4);
 
         &.cartBtn {
           position: absolute;
@@ -71,4 +74,32 @@
       }
     }
   }
+  @media (max-width: 1200px) {
+    .logo {
+      width: calc(100% / 5);
+    }
+    .menu {
+      width: calc(100% / 3);
+    }
+  }
+  @media (max-width: 1024px) {
+    .logo {
+      width: calc(100% / 4);
+    }
+    .menu {
+      width: calc(100% / 2.5);
+    }
+  }
+  @media (max-width: 768px) {
+   .headerContainer{
+      display: flex;
+      flex-direction: column;
+   }
+   .logo {
+     width: calc(100% );
+   }
+   .menu {
+     width: calc(100% );
+   }
+ }
 }

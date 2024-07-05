@@ -8,6 +8,7 @@ import Login from '../Header-Section/Login'
 
 const Header = () => {
   const [activeSection, setActiveSection] = useState(null)
+  // this is suck
   const [visibleSection, setVisibleSection] = useState(null)
   const shopBtnRef = useRef(null)
   const cartBtnRef = useRef(null)
@@ -25,6 +26,8 @@ const Header = () => {
     }
   }
 
+
+  // this is suck
   useEffect(() => {
     if (activeSection) {
       if (activeSection === 'cart') {
@@ -118,7 +121,8 @@ const Header = () => {
           router.push('/')
         }}
       >
-        <img src="/icons/logoText.svg" alt="Logo" />
+        <img src="/icons/logo.svg" alt="Logo" />
+        SKATT
       </div>
       <div className={styles.menu}>
         <div className={styles.links}>
