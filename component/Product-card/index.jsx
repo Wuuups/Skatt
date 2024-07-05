@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styles from './product-cart.module.scss'
 
@@ -24,35 +25,24 @@ export default function ProductCard() {
   }
 
   // 動畫執行
-  useLayoutEffect(() => {
-    //設定初始狀態 卡片大小 INFO顯示
-    gsap.set(cardRef.current, { width: 'calc((100% / 6) - 28px)' })
-    gsap.set(imgRef.current, { width: '100%' })
-    gsap.set(infoRef.current, { display: 'none', opacity: 0 })
-
+  useGSAP(() => {
     // 動畫時間軸
     tl.current = gsap
       .timeline({ defaults: { duration: 1.2 }, paused: true })
       .to(cardRef.current, { width: '100%', ease: 'power3.inOut' }, 0)
       .to(imgRef.current, { width: '50%', ease: 'power3.inOut' }, 0)
-      .to(infoRef.current, {
-        display: 'flex',
-        opacity: 1,
-        onComplete: () => {},
-      })
+      .to(infoRef.current, { display: 'flex', opacity: 1, duration: 0.5 })
 
     ScrollTrigger.create({
       trigger: cardRef.current,
-      onUpdate: () => {
+      onUpdate: (self) => {
+         
         setIsExpand(false)
       },
     })
+  })
 
-    return () => {
-      tl.current.kill()
-    }
-  }, [])
-
+  // 執行判定
   useEffect(() => {
     if (isExpand) {
       tl.current.play()
