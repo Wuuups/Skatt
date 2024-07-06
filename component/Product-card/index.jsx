@@ -12,14 +12,15 @@ gsap.registerPlugin(ScrollTrigger)
 // bonus 動畫觸發時減緩滾動速度
 
 export default function ProductCard() {
-  // 展開狀態
-  const [isExpand, setIsExpand] = useState(false)
-
-  // 綁定元素
-  const cardRef = useRef(null)
-  const imgRef = useRef(null)
-  const infoRef = useRef(null)
-  const tl = useRef(null)
+   
+   // 綁定元素
+   const cardRef = useRef(null)
+   const imgRef = useRef(null)
+   const infoRef = useRef(null)
+   const tl = useRef(null)
+   
+   // 展開狀態
+   const [isExpand, setIsExpand] = useState(false)
 
   // 切換展開
   const handleExpand = () => {

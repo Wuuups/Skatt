@@ -8,20 +8,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// 暫時資料
-const data = [
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-  <ProductCard />,
-]
+// 暫時
+const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 // 卡片距離判定(依箭頭判定當前商品)
 // 滾輪可以將展開的商品關閉
@@ -30,20 +18,27 @@ const data = [
 // 依據箭頭的指向顯示該商品名稱
 
 export default function productPage() {
+  // 展開狀態
+  const [isExpand, setIsExpand] = useState(false)
 
-  useGSAP(() => {
+  // 切換展開
+  const handleExpand = () => {
+    setIsExpand(true)
+  }
 
-  })
+  // 動畫效果
+  useGSAP(() => {})
+
+  // fetch資料
+  useEffect(() => {}, [])
 
   return (
     <section>
-      <div className={styles.productSection}>
-        {data.map((product, i) => {
-          return (
-            <>
-              <div key={i}>{product}</div>
-            </>
-          )
+      {/* 此div用於記算高度(箭頭的位置) */}
+      <div className={styles.productWrapper}>
+        <div className={styles.arrow}></div>
+        {data.map((i) => {
+          return <ProductCard key={i} />
         })}
       </div>
     </section>

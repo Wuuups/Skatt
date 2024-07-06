@@ -47,6 +47,7 @@ export default function Marquee() {
   let x
 
   useEffect(() => {
+    let animationId
     const animation = () => {
       if (xPercent <= -100) {
         xPercent = 0
@@ -57,10 +58,10 @@ export default function Marquee() {
       gsap.set(firstText.current, { xPercent: xPercent })
       gsap.set(secondText.current, { xPercent: xPercent })
       xPercent += 0.06 * direction
-      requestAnimationFrame(animation)
+      animationId = requestAnimationFrame(animation)
     }
 
-    requestAnimationFrame(animation)
+    animationId = requestAnimationFrame(animation)
 
     const trigger = ScrollTrigger.create({
       trigger: slider.current,
@@ -75,7 +76,7 @@ export default function Marquee() {
 
     return () => {
       trigger.kill()
-      cancelAnimationFrame(animation)
+      cancelAnimationFrame(animationId)
     }
   }, [])
 
