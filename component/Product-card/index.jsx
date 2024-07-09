@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useLayoutEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -9,23 +9,18 @@ gsap.registerPlugin(ScrollTrigger)
 // 卡片處理: 縮放 & 展開
 // 動畫觸發: 點擊展開 滑動關閉
 
-// bonus 動畫觸發時減緩滾動速度
+// bonus: 動畫執行時減緩滾動速度
 
-export default function ProductCard() {
-   
-   // 綁定元素
-   const cardRef = useRef(null)
-   const imgRef = useRef(null)
-   const infoRef = useRef(null)
-   const tl = useRef(null)
-   
-   // 展開狀態
-   const [isExpand, setIsExpand] = useState(false)
-
-  // 切換展開
-  const handleExpand = () => {
-    setIsExpand(true)
-  }
+export default function ProductCard({
+  index, // 該商品index
+  expandedIndex, // 新商品index
+  handleExpand, // 函式引用
+}) {
+  // 綁定元素
+  const cardRef = useRef(null)
+  const imgRef = useRef(null)
+  const infoRef = useRef(null)
+  const tl = useRef(null)
 
   // 動畫執行
   useGSAP(() => {
@@ -60,7 +55,7 @@ export default function ProductCard() {
             // 圖片容器只有卡片容器的一半
             imgRef.current,
             {
-              width: isSmall ? '100%' : '50%',
+              width: '50%',
               // 控制hover效果
               onStart: () => {
                 imgRef.current.classList.remove(styles.expand)
@@ -87,8 +82,8 @@ export default function ProductCard() {
           trigger: cardRef.current,
           onUpdate: (self) => {
             // 小尺寸下取消滾動關閉
-            if (self.direction && !isSmall) {
-              setIsExpand(false)
+            if ((self.direction = -1 && !isSmall)) {
+              handleExpand(null)
             }
           },
         })
@@ -98,16 +93,16 @@ export default function ProductCard() {
 
   // 執行判定
   useEffect(() => {
-    if (isExpand) {
+    if (expandedIndex === index) {
       tl.current.play()
     } else {
       tl.current.reverse()
     }
-  }, [isExpand])
+  })
 
   return (
-    <div className={styles.container}>
-      <div ref={cardRef} className={styles.cardWrapper} onClick={handleExpand}>
+    <div className={styles.container} onClick={() => handleExpand(index)}>
+      <div ref={cardRef} className={styles.cardWrapper}>
         <div ref={imgRef} className={`${styles.imgWrapper} ${styles.expand}`}>
           <img src="/product-images/testimg.png" />
         </div>

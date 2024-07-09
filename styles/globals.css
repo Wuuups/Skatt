@@ -13,8 +13,8 @@ html {
     font-size: 15px;
   }
   @media (max-width: 1024px) {
-   font-size: 14px;
- }
+    font-size: 14px;
+  }
 }
 
 :root {
@@ -44,6 +44,7 @@ html {
 }
 
 body {
+  padding: 28px;
   display: flex;
   flex-direction: column;
   background-color: var(--neutral-light);
@@ -59,13 +60,12 @@ body {
 }
 
 main {
-  margin-top: 100px;
+  margin-top: 72px;
   flex: 1 0 auto;
 }
 
 header {
   flex: 0 0 auto;
-  padding: 28px 0;
   left: 28px;
   position: fixed;
   width: calc(100% - 56px);
@@ -73,13 +73,10 @@ header {
 }
 
 footer {
-  padding: 0 28px;
   flex: 0 0 auto;
-  margin: 28px 0;
 }
 
 section {
-  padding: 0 28px 28px 28px;
   min-height: calc(100vh - 100px);
   position: relative;
   overflow: hidden;
