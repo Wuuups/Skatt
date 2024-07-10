@@ -18,9 +18,9 @@ export const ResponsiveProvider = ({ children }) => {
 
     media.add(
       {
-        isSmall: '(max-width: 576px)',
-        isMedium: '(min-width: 577px) and (max-width: 1200px)',
-        isLarge: '(min-width: 1201px)',
+        isSmall: '(max-width: 375px)',
+        isMedium: '(min-width: 376px) and (max-width: 768px)',
+        isLarge: '(min-width: 1440px)',
       },
       (context) => {
         setMediaConditions(context.conditions)

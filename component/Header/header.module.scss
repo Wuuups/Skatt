@@ -74,7 +74,7 @@
       }
     }
   }
-  @media (max-width: 1200px) {
+  @media (max-width: 1440px) {
     .logo {
       width: calc(100% / 7);
     }
@@ -82,15 +82,15 @@
       width: calc(100% / 3);
     }
   }
-  @media (max-width: 1024px) {
+  @media (max-width: 768px) {
     .logo {
-      width: calc(100% / 6);
+      width: calc(100%);
     }
     .menu {
-      width: calc(100% / 2.5);
+      width: calc(100%);
     }
   }
-  @media (max-width: 768px) {
+  @media (max-width: 375px) {
    .headerContainer{
       display: flex;
       flex-direction: column;

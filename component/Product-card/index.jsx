@@ -3,6 +3,10 @@ import styles from './product-card.module.scss'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { useResponsive } from '@/context/ResponsiveContext'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // 動畫處理: 縮放 & 展開
 // 動畫觸發: 點擊展開 滑動關閉
@@ -14,29 +18,33 @@ export default function ProductCard({
   expandedIndex, // 新商品index
   handleExpand, // 函式引用
 }) {
-  // 引入尺寸
   const { isSmall } = useResponsive()
-  // 綁定元素
   const cardRef = useRef(null)
   const imgRef = useRef(null)
   const infoRef = useRef(null)
   const tl = useRef(null)
 
-  useGSAP(() => {
-    // 商品的展開關閉動畫
-    tl.current = gsap
-      .timeline({
-        defaults: { ease: 'power3.inOut', duration: 1.2 },
-        paused: true,
-        // 動畫完成後清除樣式
-        onReverseComplete: () => {
-          gsap.set([cardRef.current, imgRef.current, infoRef.current], {
-            clearProps: 'all',
-          })
-        },
-      })
+  // 創建商品動畫
+  const createAnimation = () => {
+    tl.current = gsap.timeline({
+      defaults: { ease: 'power3.inOut', duration: 1.2 },
+      paused: true,
+      onStart: () => {
+        //   ScrollTrigger.getAll().forEach((ST) => ST.disable())
+      },
+      onComplete: () => {
+        //   ScrollTrigger.getAll().forEach((ST) => ST.enable())
+      },
+      onReverseComplete: () => {
+        gsap.set([cardRef.current, imgRef.current, infoRef.current], {
+          clearProps: 'all',
+        })
+        //   ScrollTrigger.refresh()
+      },
+    })
+
+    tl.current
       .to(
-        // 商品容器放至最大
         cardRef.current,
         {
           width: 'calc(100vw - 56px)',
@@ -45,43 +53,70 @@ export default function ProductCard({
         0
       )
       .to(
-        // 圖片容器只有商品容器的一半
         imgRef.current,
         {
           width: isSmall ? '100%' : '50%',
-          // 控制hover效果
-          onStart: () => {
-            imgRef.current.classList.remove(styles.expand)
-          },
-          onReverseComplete: () => {
-            imgRef.current.classList.add(styles.expand)
-          },
+          onStart: () => imgRef.current.classList.remove(styles.expand),
+          onReverseComplete: () => imgRef.current.classList.add(styles.expand),
         },
         0
       )
-      .to(
-        // 商品資訊最後顯示
-        infoRef.current,
-        {
-          width: isSmall ? '100%' : '50%',
-          display: 'flex',
-          opacity: 1,
-          duration: 0.3,
-        }
-      )
-  }, [isSmall])
+      .to(infoRef.current, {
+        width: isSmall ? '100%' : '50%',
+        display: 'flex',
+        opacity: 1,
+        duration: 0.3,
+      })
+  }
 
-  // 執行判定
+  // 播放動畫
+  const playAnimation = () => {
+    tl.current.timeScale(1).play()
+  }
+
+  // 反轉動畫
+  const reverseAnimation = (speed = 1.5) => {
+    tl.current.timeScale(speed).reverse()
+  }
+
+  useGSAP(() => {
+    // 使用動畫
+    createAnimation()
+    // 滾動時觸發動畫回放
+    ScrollTrigger.create({
+      trigger: cardRef.current[index],
+      onUpdate: (self) => {
+        reverseAnimation()
+      },
+    })
+  }, [isSmall, index])
+
+  // 比對傳入參數與商品index是否符合
   useEffect(() => {
+    // 點擊的卡片
     if (expandedIndex === index) {
-      tl.current.play()
+      gsap.to(window, {
+        duration: 0.7,
+        scrollTo: {
+          y: cardRef.current,
+          offsetY: 100,
+        },
+        ease: 'power3.inOut',
+        onComplete: () => {
+          playAnimation()
+        },
+      })
     } else {
-      tl.current.reverse()
+      reverseAnimation()
     }
   }, [index, expandedIndex])
 
   return (
-    <div className={styles.container} onClick={() => handleExpand(index)}>
+    <div
+      className={styles.container}
+      data-index={index}
+      onClick={() => handleExpand(index)}
+    >
       <div ref={cardRef} className={styles.cardWrapper}>
         <div ref={imgRef} className={`${styles.imgWrapper} ${styles.expand}`}>
           <img src="/product-images/testimg.png" />
