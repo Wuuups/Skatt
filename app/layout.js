@@ -1,6 +1,7 @@
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import Header from '@/component/Header'
 import Footer from '@/component/Footer'
+import { ResponsiveProvider } from '@/context/ResponsiveContext'
 
 export default function RootLayout({ children }) {
   return (
@@ -10,7 +11,9 @@ export default function RootLayout({ children }) {
         <header>
           <Header />
         </header>
-        <main>{children}</main>
+        <ResponsiveProvider>
+          <main>{children}</main>
+        </ResponsiveProvider>
         <footer>
           <Footer />
         </footer>
