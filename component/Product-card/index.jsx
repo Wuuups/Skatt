@@ -39,7 +39,6 @@ export default function ProductCard({
         gsap.set([cardRef.current, imgRef.current, infoRef.current], {
           clearProps: 'all',
         })
-        //   ScrollTrigger.refresh()
       },
     })
 

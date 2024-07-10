@@ -23,7 +23,6 @@ const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 export default function productPage() {
   // 當前頁面展開的商品
   const [expandedIndex, setExpandedIndex] = useState(null)
-
   const wrapperRef = useRef(null)
 
   // 點擊時將新商品的index傳入
@@ -32,7 +31,11 @@ export default function productPage() {
   }
 
   // 動畫效果
-  useGSAP(() => {}, [])
+  useGSAP(() => {
+   // wrapper高度
+   
+
+  }, [])
 
   // fetch資料
   useEffect(() => {}, [])
@@ -41,7 +44,9 @@ export default function productPage() {
     <section>
       {/* 此div用於記算高度(箭頭的位置) */}
       <div ref={wrapperRef} className={styles.productWrapper}>
-        <div className={styles.arrow}></div>
+        <div className={styles.pointer}>
+        
+        </div>
         {data.map((index) => {
           return (
             <ProductCard
