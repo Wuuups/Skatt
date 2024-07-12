@@ -13,11 +13,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // bonus: 動畫執行時減緩滾動速度
 
-export default function ProductCard({
-  index, // 該商品index
-  expandedIndex, // 新商品index
-  handleExpand, // 函式引用
-}) {
+export default function ProductCard({ index, expandedIndex, handleExpand }) {
   const { isSmall } = useResponsive()
   const cardRef = useRef(null)
   const imgRef = useRef(null)
@@ -29,12 +25,6 @@ export default function ProductCard({
     tl.current = gsap.timeline({
       defaults: { ease: 'power3.inOut', duration: 1.2 },
       paused: true,
-      onStart: () => {
-        //   ScrollTrigger.getAll().forEach((ST) => ST.disable())
-      },
-      onComplete: () => {
-        //   ScrollTrigger.getAll().forEach((ST) => ST.enable())
-      },
       onReverseComplete: () => {
         gsap.set([cardRef.current, imgRef.current, infoRef.current], {
           clearProps: 'all',
@@ -83,8 +73,8 @@ export default function ProductCard({
     createAnimation()
     // 滾動時觸發動畫回放
     ScrollTrigger.create({
-      trigger: cardRef.current[index],
-      onUpdate: (self) => {
+      trigger: cardRef.current,
+      onUpdate: () => {
         reverseAnimation()
       },
     })
@@ -92,7 +82,6 @@ export default function ProductCard({
 
   // 比對傳入參數與商品index是否符合
   useEffect(() => {
-    // 點擊的卡片
     if (expandedIndex === index) {
       gsap.to(window, {
         duration: 0.7,
@@ -107,17 +96,14 @@ export default function ProductCard({
       })
     } else {
       reverseAnimation()
+      handleExpand(null) // 設置為null 再次點擊時才可觸發
     }
   }, [index, expandedIndex])
 
   return (
     <div className={styles.container} data-index={index}>
       <div ref={cardRef} className={styles.cardWrapper}>
-        <div
-          ref={imgRef}
-          className={`${styles.imgWrapper} ${styles.expand}`}
-          onClick={() => handleExpand(index)}
-        >
+        <div ref={imgRef} className={`${styles.imgWrapper} ${styles.expand}`}>
           <img src="/product-images/testimg.png" />
         </div>
         <div ref={infoRef} className={styles.infoWrapper}>
