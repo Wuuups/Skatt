@@ -101,7 +101,7 @@ export default function ProductCard({ index, expandedIndex, handleExpand }) {
   }, [index, expandedIndex])
 
   return (
-    <div className={styles.container} data-index={index}>
+    <div className={styles.container} data-index={index} onClick={() => handleExpand(index)}>
       <div ref={cardRef} className={styles.cardWrapper}>
         <div ref={imgRef} className={`${styles.imgWrapper} ${styles.expand}`}>
           <img src="/product-images/testimg.png" />

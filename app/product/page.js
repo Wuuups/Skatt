@@ -18,7 +18,7 @@ const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 // 3.同時間只能有一個商品展開 done
 // 4.當前展開的商品會至於頁面中央 done
 // 5.依據箭頭的指向顯示該商品名稱
-// 6.頁面高度判定: 確保箭頭能夠指向所有商品
+// 6.頁面高度判定: 確保箭頭能夠指向所有商品 done
 
 export default function productPage() {
   // 當前頁面展開的商品
@@ -26,7 +26,7 @@ export default function productPage() {
   const containerRef = useRef(null)
   const wrapperRef = useRef(null)
   const pointerRef = useRef(null)
-  const cardRef = useRef(null)
+  const cardRef = useRef([])
 
   // 點擊時將新商品的index傳入
   const handleExpand = (index) => {
@@ -35,7 +35,7 @@ export default function productPage() {
 
   // 計算pointer大小
   const updateLayout = () => {
-    const cardLength = cardRef.current.offsetHeight
+    const cardLength = cardRef.current[0].offsetHeight
     const y = window.innerHeight - 156 - cardLength - 207
     gsap.set(pointerRef.current, { height: cardLength })
     gsap.set(wrapperRef.current, {
@@ -44,19 +44,20 @@ export default function productPage() {
     })
   }
 
-  useEffect(() => {
+  // 動畫效果
+  useGSAP(() => {
     updateLayout()
     window.addEventListener('resize', updateLayout)
+    // 切換顯示名稱
+    cardRef.current.forEach((el) => {
+      ScrollTrigger.create({
+        trigger: el,
+        markers: true,
+      })
+    })
     return () => {
       window.removeEventListener('resize', updateLayout)
     }
-  }, [])
-
-  // 動畫效果
-  useGSAP(() => {
-    // wrapper高度
-    // pointer尺寸
-    // 切換顯示名稱
   }, [])
 
   // fetch資料
@@ -76,9 +77,10 @@ export default function productPage() {
           {data.map((index) => {
             return (
               <div
-                ref={cardRef}
                 key={index}
-                onClick={() => handleExpand(index)}
+                ref={(el) => {
+                  cardRef.current[index] = el
+                }}
               >
                 <ProductCard
                   index={index} // 當前商品index
