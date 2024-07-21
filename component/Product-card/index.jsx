@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, forwardRef } from 'react'
 import styles from './product-card.module.scss'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
@@ -45,6 +45,7 @@ export default function ProductCard({ index, expandedIndex, handleExpand }) {
         imgRef.current,
         {
           width: isSmall ? '100%' : '50%',
+          pointerEvents: 'none',
           onStart: () => imgRef.current.classList.remove(styles.expand),
           onReverseComplete: () => imgRef.current.classList.add(styles.expand),
         },
@@ -105,9 +106,13 @@ export default function ProductCard({ index, expandedIndex, handleExpand }) {
       <div
         ref={cardRef}
         className={styles.cardWrapper}
-      //   onClick={() => handleExpand(index)}
+        //   onClick={() => handleExpand(index)}
       >
-        <div ref={imgRef} className={`${styles.imgWrapper} ${styles.expand}`}>
+        <div
+          ref={imgRef}
+          className={`${styles.imgWrapper} ${styles.expand}`}
+          onClick={() => handleExpand(index)}
+        >
           <img src="/product-images/testimg.png" />
         </div>
         <div ref={infoRef} className={styles.infoWrapper}>
