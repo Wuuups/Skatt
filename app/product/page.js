@@ -18,8 +18,8 @@ const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 // 2.滾輪可以將展開的商品關閉 done
 // 3.同時間只能有一個商品展開 done
 // 4.當前展開的商品會至於頁面中央 done
-// 5.依據箭頭的指向顯示該商品名稱
-// 6.頁面高度判定: 確保箭頭能夠指向所有商品 done
+// 5.頁面高度判定: 確保箭頭能夠指向所有商品 done
+// 6.依據箭頭的指向顯示該商品名稱
 // 7.連接至資料庫
 
 export default function ProductPage() {
@@ -27,6 +27,8 @@ export default function ProductPage() {
   const [expandedIndex, setExpandedIndex] = useState(null)
   // 儲存函式中取得的高度
   const [cardLength, setCardLength] = useState(0)
+
+  const [products, setProducts] = useState([])
   const containerRef = useRef(null)
   const wrapperRef = useRef(null)
   const pointerRef = useRef(null)
@@ -39,7 +41,7 @@ export default function ProductPage() {
 
   // 計算pointer大小
   const updateLayout = () => {
-   // 渲染後執行
+    // 渲染後執行
     if (triggersRef) {
       const cardLength = cardRef.current[0].offsetHeight
       setCardLength(cardLength)
@@ -70,11 +72,11 @@ export default function ProductPage() {
     cardRef.current.forEach((ref, index) => {
       if (cardLength) {
         const trigger = ScrollTrigger.create({
-          markers: true,
+         //  markers: true,
           trigger: ref,
           start: `top ${100 + cardLength}px`,
           end: `bottom ${100}px`,
-          onEnter: () => console.log('Enter'),
+          onEnter: () => console.log('Enter', products),
         })
         triggersRef.current.push(trigger)
       }
@@ -82,7 +84,20 @@ export default function ProductPage() {
   }, [cardLength])
 
   // fetch資料
-  useEffect(() => {}, [])
+  useEffect(() => {
+    async function fetchProducts() {
+      try {
+        const response = await fetch('/api/products')
+        if (!response.ok) throw new Error('Failed to fetch products')
+        const products = await response.json()
+        setProducts(products)
+        console.log(products[0].name);
+      } catch (error) {
+        console.error('Error fetching products:', error)
+      }
+    }
+    fetchProducts()
+  }, [])
 
   return (
     <section>
@@ -90,20 +105,27 @@ export default function ProductPage() {
       <div ref={containerRef} className={styles.container}>
         <div ref={pointerRef} className={styles.pointer}>
           <div>
-            <div>Colored Campbell's Soup Eggplant</div>
-            <div>(01)</div>
+            <div>{products[expandedIndex]?.name || 'Select a product'}</div>
+            <div>
+              (
+              {(expandedIndex !== null ? expandedIndex + 1 : '')
+                .toString()
+                .padStart(2, '0')}
+              )
+            </div>
           </div>
         </div>
         <div ref={wrapperRef} className={styles.productWrapper}>
-          {data.map((index) => {
+          {products.map((index) => {
             return (
               <div
-                key={index}
+                key={products._id}
                 ref={(el) => {
                   cardRef.current[index] = el
                 }}
               >
                 <ProductCard
+                  products={products}
                   index={index} // 當前商品index
                   expandedIndex={expandedIndex} // 新商品index
                   handleExpand={handleExpand}
