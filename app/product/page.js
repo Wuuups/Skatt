@@ -9,10 +9,6 @@ import ProductCard from '@/component/Product-card'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
-// 暫時
-const data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-// const data = [0]
-
 // ------ 所需功能 ------ //
 // 1.點擊展開商品 done
 // 2.滾輪可以將展開的商品關閉 done
@@ -27,6 +23,10 @@ export default function ProductPage() {
   const [expandedIndex, setExpandedIndex] = useState(null)
   // 儲存函式中取得的高度
   const [cardLength, setCardLength] = useState(0)
+  // 顯示的品名稱
+  const [productName, setProductName] = useState('')
+  // 商品編號
+  const [productIndex, setProductIndex] = useState(1)
 
   const [products, setProducts] = useState([])
   const containerRef = useRef(null)
@@ -34,6 +34,7 @@ export default function ProductPage() {
   const pointerRef = useRef(null)
   const cardRef = useRef([])
   const triggersRef = useRef([])
+
   // 點擊時將新商品的index傳入
   const handleExpand = (index) => {
     setExpandedIndex(index)
@@ -42,7 +43,7 @@ export default function ProductPage() {
   // 計算pointer大小
   const updateLayout = () => {
     // 渲染後執行
-    if (triggersRef) {
+    if (cardRef.current[0]) {
       const cardLength = cardRef.current[0].offsetHeight
       setCardLength(cardLength)
       const y = window.innerHeight - 156 - cardLength - 207
@@ -72,16 +73,21 @@ export default function ProductPage() {
     cardRef.current.forEach((ref, index) => {
       if (cardLength) {
         const trigger = ScrollTrigger.create({
-         //  markers: true,
+          markers: true,
           trigger: ref,
           start: `top ${100 + cardLength}px`,
           end: `bottom ${100}px`,
-          onEnter: () => console.log('Enter', products),
+          onEnter: () => {
+            console.log('enter', products[index].name)
+            const nextName = products[index].name
+            setProductName(nextName)
+            setProductIndex(index+1)
+          },
         })
         triggersRef.current.push(trigger)
       }
     })
-  }, [cardLength])
+  }, [cardLength, products])
 
   // fetch資料
   useEffect(() => {
@@ -91,7 +97,7 @@ export default function ProductPage() {
         if (!response.ok) throw new Error('Failed to fetch products')
         const products = await response.json()
         setProducts(products)
-        console.log(products[0].name);
+        //   console.log(products[0].name)
       } catch (error) {
         console.error('Error fetching products:', error)
       }
@@ -105,27 +111,23 @@ export default function ProductPage() {
       <div ref={containerRef} className={styles.container}>
         <div ref={pointerRef} className={styles.pointer}>
           <div>
-            <div>{products[expandedIndex]?.name || 'Select a product'}</div>
-            <div>
-              (
-              {(expandedIndex !== null ? expandedIndex + 1 : '')
-                .toString()
-                .padStart(2, '0')}
-              )
-            </div>
+            {/* 商品名稱 */}
+            <div>{productName}</div>
+            {/* 商品編號 */}
+            <div>{productIndex}</div>
           </div>
         </div>
         <div ref={wrapperRef} className={styles.productWrapper}>
-          {products.map((index) => {
+          {products.map((product, index) => {
             return (
               <div
-                key={products._id}
+                key={product._id}
                 ref={(el) => {
                   cardRef.current[index] = el
                 }}
               >
                 <ProductCard
-                  products={products}
+                  products={product}
                   index={index} // 當前商品index
                   expandedIndex={expandedIndex} // 新商品index
                   handleExpand={handleExpand}
