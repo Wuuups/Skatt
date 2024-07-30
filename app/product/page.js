@@ -78,10 +78,10 @@ export default function ProductPage() {
           start: `top ${100 + cardLength}px`,
           end: `bottom ${100}px`,
           onEnter: () => {
-            console.log('enter', products[index].name)
+            // console.log('enter', products[index].name) 
             const nextName = products[index].name
             setProductName(nextName)
-            setProductIndex(index+1)
+            setProductIndex(index + 1)
           },
         })
         triggersRef.current.push(trigger)
