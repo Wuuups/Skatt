@@ -15,7 +15,7 @@ export default function Spirit() {
       scrollTrigger: {
         trigger: spiritRef.current,
         start: 'top top',
-        end: '+=950px',
+        end: '+=900px',
         scrub: 1,
         pin: true,
         anticipatePin: 1,
@@ -47,15 +47,15 @@ export default function Spirit() {
               ref={(el) => (imagesRef.current[index] = el)}
               src={`/images/frame${index + 1}.png`}
             />
-          ))}{' '}
-          <span className={styles.sripit} ref={textRef}>
-            At SKATT, we believe in pushing boundaries and embracing the thrill
-            of the ride. Our boards are more than just a means of
-            transportation; they are a symbol of creativity, resilience, and the
-            unyielding pursuit of excellence. Join us, and become a part of a
-            community that values individuality, innovation, and the endless
-            possibilities of the open streets.
-          </span>
+          ))}
+        </div>
+        <div className={styles.sripit} ref={textRef}>
+          At SKATT, we believe in pushing boundaries and embracing the thrill of
+          the ride. Our boards are more than just a means of transportation;
+          they are a symbol of creativity, resilience, and the unyielding
+          pursuit of excellence. Join us, and become a part of a community that
+          values individuality, innovation, and the endless possibilities of the
+          open streets.
         </div>
       </div>
     </section>

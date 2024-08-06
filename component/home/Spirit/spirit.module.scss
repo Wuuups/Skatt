@@ -10,11 +10,12 @@
   .imgContainer {
     display: flex;
     & img {
-      padding-right: 4px;
+      width: 100% ;
+      margin: 0 4px;
       opacity: 0;
     }
-    & .sripit {
-      padding: 20px;
-    }
+  }
+  & .sripit {
+    padding-block: 20px;
   }
 }
