@@ -43,6 +43,7 @@ export default function Spirit() {
         <div className={styles.imgContainer}>
           {[...Array(9)].map((_, index) => (
             <img
+            className={styles.image}
               key={index}
               ref={(el) => (imagesRef.current[index] = el)}
               src={`/images/frame${index + 1}.png`}

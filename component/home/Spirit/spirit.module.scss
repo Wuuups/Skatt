@@ -9,13 +9,15 @@
 
   .imgContainer {
     display: flex;
+    // flex-wrap: wrap;
+    height: auto;
+
     & img {
-      width: 100% ;
-      margin: 0 4px;
-      opacity: 0;
+      // width: 0%;
+      // flex: 1;
     }
   }
-  & .sripit {
+  .sripit {
     padding-block: 20px;
   }
 }
