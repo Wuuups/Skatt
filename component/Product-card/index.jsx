@@ -13,15 +13,22 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // bonus: 動畫執行時減緩滾動速度
 
-export default function ProductCard({ index, expandedIndex, handleExpand }) {
+export default function ProductCard({
+  index,
+  expandedIndex,
+  handleExpand,
+  product,
+}) {
   const { isSmall } = useResponsive()
   const cardRef = useRef(null)
   const imgRef = useRef(null)
   const infoRef = useRef(null)
   const tl = useRef(null)
 
-  // 創建商品動畫
-  const createAnimation = () => {
+  console.log(product)
+
+  // 創建動畫
+  const cardAnimation = () => {
     tl.current = gsap.timeline({
       defaults: { ease: 'power3.inOut', duration: 1.2 },
       paused: true,
@@ -71,7 +78,7 @@ export default function ProductCard({ index, expandedIndex, handleExpand }) {
 
   useGSAP(() => {
     // 使用動畫
-    createAnimation()
+    cardAnimation()
     // 滾動時觸發動畫回放
     ScrollTrigger.create({
       trigger: cardRef.current,
@@ -103,11 +110,7 @@ export default function ProductCard({ index, expandedIndex, handleExpand }) {
 
   return (
     <div className={styles.container} data-index={index}>
-      <div
-        ref={cardRef}
-        className={styles.cardWrapper}
-        //   onClick={() => handleExpand(index)}
-      >
+      <div ref={cardRef} className={styles.cardWrapper}Ｆ>
         <div
           ref={imgRef}
           className={`${styles.imgWrapper} ${styles.expand}`}
@@ -116,25 +119,13 @@ export default function ProductCard({ index, expandedIndex, handleExpand }) {
           <img src="/product-images/testimg.png" />
         </div>
         <div ref={infoRef} className={styles.infoWrapper}>
-          <div className={styles.productName}>
-            Colored Campbell's Soup Eggplant
-          </div>
+          <div className={styles.productName}>{product.name}</div>
           <div className={styles.productInfo}>
             <p className={styles.title}>Open Edition</p>
-            <p>
-              In the early sixties, Andy Warhol created many works depicting
-              consumer products, Hollywood stars, and a highly publicized series
-              illustrating death and disaster in American society. As one of the
-              most recognized faces in contemporary art, it seemed obvious for
-              us to try and perpetuate Andy Warhol’s vision through our
-              production. That’s why we recently collaborated with the Andy
-              Warhol Foundation for the Visual Arts to produce a series of
-              Andy’s most iconic works: Colored Campbell's Soup Cans. Under
-              license from The Andy Warhol Foundation for the Visual Arts, Inc.
-            </p>
+            <p>{product.info}</p>
           </div>
           <div className={styles.productOptions}>
-            <div className={styles.productPrice}>$7,217.00</div>
+            <div className={styles.productPrice}>{product.price}</div>
             <div className={styles.productNum}>
               <div>
                 <img src="/icons/minus.svg" />

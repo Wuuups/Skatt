@@ -16,18 +16,13 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 // 4.當前展開的商品會至於頁面中央 done
 // 5.頁面高度判定: 確保箭頭能夠指向所有商品 done
 // 6.依據箭頭的指向顯示該商品名稱
-// 7.連接至資料庫
+// 7.連接至資料庫 done
 
 export default function ProductPage() {
-  // 當前頁面展開的商品
   const [expandedIndex, setExpandedIndex] = useState(null)
-  // 儲存函式中取得的高度
   const [cardLength, setCardLength] = useState(0)
-  // 顯示的品名稱
   const [productName, setProductName] = useState('')
-  // 商品編號
   const [productIndex, setProductIndex] = useState(1)
-
   const [products, setProducts] = useState([])
   const containerRef = useRef(null)
   const wrapperRef = useRef(null)
@@ -73,12 +68,12 @@ export default function ProductPage() {
     cardRef.current.forEach((ref, index) => {
       if (cardLength) {
         const trigger = ScrollTrigger.create({
-          markers: true,
+          // markers: true,
           trigger: ref,
           start: `top ${100 + cardLength}px`,
           end: `bottom ${100}px`,
           onEnter: () => {
-            // console.log('enter', products[index].name) 
+            // console.log('enter', products[index].name)
             const nextName = products[index].name
             setProductName(nextName)
             setProductIndex(index + 1)
@@ -97,7 +92,7 @@ export default function ProductPage() {
         if (!response.ok) throw new Error('Failed to fetch products')
         const products = await response.json()
         setProducts(products)
-        //   console.log(products[0].name)
+        console.log(products)
       } catch (error) {
         console.error('Error fetching products:', error)
       }
@@ -127,7 +122,7 @@ export default function ProductPage() {
                 }}
               >
                 <ProductCard
-                  products={product}
+                  product={product}
                   index={index} // 當前商品index
                   expandedIndex={expandedIndex} // 新商品index
                   handleExpand={handleExpand}

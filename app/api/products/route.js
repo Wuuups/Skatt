@@ -9,6 +9,7 @@ export async function GET() {
     const products = await db.collection('products').find({}).toArray();
     return NextResponse.json(products);
   } catch (error) {
+    console.error('Error in GET /api/products:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
