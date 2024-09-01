@@ -25,8 +25,6 @@ export default function ProductCard({
   const infoRef = useRef(null)
   const tl = useRef(null)
 
-  console.log(product)
-
   // 創建動畫
   const cardAnimation = () => {
     tl.current = gsap.timeline({
@@ -79,17 +77,7 @@ export default function ProductCard({
   useGSAP(() => {
     // 使用動畫
     cardAnimation()
-    // 滾動時觸發動畫回放
-    ScrollTrigger.create({
-      trigger: cardRef.current,
-      onUpdate: () => {
-        reverseAnimation()
-      },
-    })
-  }, [isSmall, index])
-
-  // 比對傳入參數與商品index是否符合
-  useEffect(() => {
+    // 判斷是否為當前商品
     if (expandedIndex === index) {
       gsap.to(window, {
         duration: 0.7,
@@ -106,11 +94,18 @@ export default function ProductCard({
       reverseAnimation()
       handleExpand(null) // 設置為null 再次點擊時才可觸發
     }
-  }, [index, expandedIndex])
+    // 滾動時觸發動畫回放
+    ScrollTrigger.create({
+      trigger: cardRef.current,
+      onUpdate: () => {
+        reverseAnimation()
+      },
+    })
+  }, [isSmall, index, expandedIndex])
 
   return (
     <div className={styles.container} data-index={index}>
-      <div ref={cardRef} className={styles.cardWrapper}Ｆ>
+      <div ref={cardRef} className={styles.cardWrapper}>
         <div
           ref={imgRef}
           className={`${styles.imgWrapper} ${styles.expand}`}
