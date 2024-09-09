@@ -1,19 +1,20 @@
 // .copntainer {
 //   display: flex;
-  .pointer {
-    pointer-events: none;
-    font-size: var(--h1);
-    position: sticky;
-    // top: 100px;
-    display: flex;
-    justify-content: space-between;
-    > div {
-      width: 50%;
-      display: flex;
-      justify-content: space-between;
-      margin-block: auto;
-      margin-left: auto;
-      padding-inline: 20px 0;
-    }
-  }
+//   .pointer {
+//     border: 1px solid #aaa;
+//     pointer-events: none;
+//     font-size: var(--h1);
+//     position: sticky;
+//     top: 100px;
+//     display: flex;
+//     justify-content: space-between;
+//     > div {
+//       width: 50%;
+//       display: flex;
+//       justify-content: space-between;
+//       margin-block: auto;
+//       margin-left: auto;
+//       padding-inline: 20px 0;
+//     }
+//   }
 // }
